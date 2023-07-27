@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
+
 export default function SearchBar() {
+  const [searchValue, setSearchValue] = useState("");
   function handleSearch(e) {
     e.preventDefault();
-    console.log("Searchin");
   }
+
   return (
     <form onSubmit={handleSearch}>
       <label className='mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white'>
@@ -31,6 +34,7 @@ export default function SearchBar() {
         <input
           type='search'
           id='default-search'
+          onChange={(e) => setSearchValue(e.target.value)}
           className='block w-full p-4 pl-10 text-sm text-slate-300 border border-gray-600 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500'
           placeholder='Search'
           required

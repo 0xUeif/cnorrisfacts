@@ -47,21 +47,20 @@ export default async function CategoriesPage() {
     </main>
   );
 }
-function Category_list(categories: Array) {
+function Category_list(categories) {
   const listItems = categories.categories.map((category) => (
     <Link key='id' href={`/categories/${category}`}>
       <li key='id'>{category}</li>
     </Link>
   ));
   return (
-    <ul className='text-slate-200 p-5 flex flex-row gap-2'>{listItems}</ul>
+    <ul className='text-slate-500 p-5 flex flex-row gap-2'>{listItems}</ul>
   );
 }
 
 async function getJokeCategories() {
   const res = await fetch(`${API}/categories`);
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
 
@@ -95,14 +94,8 @@ function JokeCard(joke) {
 }
 async function getRandomJoke() {
   const res = await fetch(`${API}/random`, { next: { tags: ["random"] } });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  // Recommendation: handle errors
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
-
   return res.json();
 }

@@ -26,6 +26,15 @@ async function getJokeCategories() {
 
   return res.json();
 }
+async function searchJoke(searchValue: string) {
+  const res = await fetch(`${API}/search?query=${searchValue}`);
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
 function JokeCard(joke) {
   return (
     <Card>
@@ -43,6 +52,7 @@ function JokeCard(joke) {
     </Card>
   );
 }
+
 type Props = {
   children: JSX.Element | JSX.Element[];
 };
