@@ -26,11 +26,10 @@ async function getJokeCategories() {
 
   return res.json();
 }
-async function searchJoke(searchValue: string) {
+async function getSearchJoke(searchValue) {
   const res = await fetch(`${API}/search?query=${searchValue}`);
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    console.log("Failed to search");
   }
 
   return res.json();
@@ -73,9 +72,20 @@ function Category_list(categories: Array) {
   return <ul>{listItems}</ul>;
 }
 
-export default async function Home() {
+export default async function Home({ params, searchParams }) {
   const jokes = await getRandomJoke();
   const category = await getJokeCategories();
+  let search = searchParams.search ?? "";
+  let searchJokes = await getSearchJoke(search.toString());
+
+  let checkError = (object) => {
+    return object.status === 400;
+  };
+  let isJokes = false;
+  if (!checkError(searchJokes)) {
+    isJokes = searchJokes.result.length !== 0;
+  }
+  console.log(isJokes);
 
   async function refreshJoke() {
     "use server";
@@ -110,7 +120,13 @@ export default async function Home() {
             </div>
           </Card>
         </div>
-        <JokeCard joke={jokes} />
+        <div>
+          {!isJokes ? (
+            <JokeCard joke={jokes} />
+          ) : (
+            <JokeCard joke={searchJokes.result[0]} />
+          )}
+        </div>
       </div>
     </main>
   );
