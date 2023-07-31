@@ -47,7 +47,7 @@ export default async function CategoriesPage() {
     </main>
   );
 }
-function Category_list(categories) {
+function Category_list(categories: any) {
   const listItems = categories.categories.map((category) => (
     <Link key='id' href={`/categories/${category}`}>
       <li key='id'>{category}</li>
@@ -66,6 +66,9 @@ async function getJokeCategories() {
 
   return res.json();
 }
+type Props = {
+  children: JSX.Element | JSX.Element[];
+};
 
 function Card({ children }: Props) {
   return (
@@ -75,7 +78,7 @@ function Card({ children }: Props) {
   );
 }
 
-function JokeCard(joke) {
+function JokeCard(joke: any) {
   return (
     <Card>
       <div className='flex flex-col items-center p-5 gap-5 justify-center'>

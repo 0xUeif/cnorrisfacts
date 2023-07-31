@@ -68,7 +68,9 @@ async function getRandomJokeCategory(category) {
 
   return res.json();
 }
-
+type Props = {
+  children: JSX.Element | JSX.Element[];
+};
 function Card({ children }: Props) {
   return (
     <div className='max-w-sm flex-row items-center p-5 justify-center h-fit bg-gray-700 border border-gray-600 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700'>
@@ -77,7 +79,7 @@ function Card({ children }: Props) {
   );
 }
 
-function JokeCard(joke) {
+function JokeCard(joke: any) {
   return (
     <Card>
       <div className='flex flex-col items-center p-5 gap-5 justify-center'>

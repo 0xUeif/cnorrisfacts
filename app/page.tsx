@@ -17,24 +17,18 @@ async function getRandomJoke() {
 
   return res.json();
 }
-async function getJokeCategories() {
-  const res = await fetch(`${API}/categories`);
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
 
-  return res.json();
-}
-async function getSearchJoke(searchValue) {
+async function getSearchJoke(searchValue: any) {
   const res = await fetch(`${API}/search?query=${searchValue}`);
   if (!res.ok) {
     console.log("Failed to search");
+    //the cnorris api returns an error when you search for anything
+    // that is less than 3 characters therefore im not throwing an error here
   }
 
   return res.json();
 }
-function JokeCard(joke) {
+function JokeCard(joke: any) {
   return (
     <Card>
       <div className='flex flex-col items-center p-5 gap-5 justify-center'>
@@ -62,31 +56,27 @@ function Card({ children }: Props) {
     </div>
   );
 }
+type SearchProps = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-function Category_list(categories: Array) {
-  const listItems = categories.categories.map((category) => (
-    <Link key='id' href={category}>
-      {category}
-    </Link>
-  ));
-  return <ul>{listItems}</ul>;
-}
-
-export default async function Home({ params, searchParams }) {
+export default async function Home({ params, searchParams }: SearchProps) {
   const jokes = await getRandomJoke();
-  const category = await getJokeCategories();
-  let search = searchParams.search ?? "";
+  let search = searchParams.search ?? ""; //get search params
   let searchJokes = await getSearchJoke(search.toString());
 
-  let checkError = (object) => {
+  //checks if there is any error object for instances where we are not throwing errors
+  let checkError = (object: any) => {
     return object.status === 400;
   };
+  // isjokes shows if search has returned any jokes else we'll show a random joke
   let isJokes = false;
   if (!checkError(searchJokes)) {
     isJokes = searchJokes.result.length !== 0;
   }
-  console.log(isJokes);
 
+  //server action to get new joke
   async function refreshJoke() {
     "use server";
     revalidateTag("random");

@@ -9,7 +9,7 @@ export default function SearchBar() {
   let pathname = usePathname();
   let searchParams = useSearchParams();
 
-  let handleSearch = (term) => {
+  let handleSearch = (term: string) => {
     let params = new URLSearchParams(searchParams);
     if (term) {
       params.set("search", term);
@@ -23,13 +23,13 @@ export default function SearchBar() {
     });
   };
 
-  let handleSearchClick = (e) => {
+  let handleSearchClick = (e: any) => {
     e.preventDefault();
     router.push(`/?search=${searchParams.get("search")}`);
   };
 
   return (
-    <form onSubmit={handleSearch}>
+    <form>
       <label className='mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white'>
         Search
       </label>
