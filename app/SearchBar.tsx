@@ -10,7 +10,7 @@ export default function SearchBar() {
   let searchParams = useSearchParams();
 
   let handleSearch = (term: string) => {
-    let params = new URLSearchParams(searchParams);
+    let params = new URLSearchParams(window.location.search);
     if (term) {
       params.set("search", term);
     } else {
