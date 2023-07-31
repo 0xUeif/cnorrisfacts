@@ -48,7 +48,7 @@ export default async function CategoriesPage() {
   );
 }
 function Category_list(categories: any) {
-  const listItems = categories.categories.map((category) => (
+  const listItems = categories.categories.map((category: any) => (
     <Link key='id' href={`/categories/${category}`}>
       <li key='id'>{category}</li>
     </Link>

@@ -53,7 +53,7 @@ export default async function Page({
   );
 }
 
-async function getRandomJokeCategory(category) {
+async function getRandomJokeCategory(category: any) {
   const res = await fetch(`${API}/random?category=${category}`, {
     next: { tags: ["random"] },
   });
