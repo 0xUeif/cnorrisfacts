@@ -51,7 +51,7 @@ type Props = {
 };
 function Card({ children }: Props) {
   return (
-    <div className='max-w-sm flex-row items-center p-5 justify-center h-fit bg-gray-700 border border-gray-600 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700'>
+    <div className='max-w-sm gap-1 flex-col items-center p-1 h-fit bg-gray-700 border border-gray-600 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 sm:p-5'>
       {children}
     </div>
   );
@@ -85,20 +85,20 @@ export default async function Home({ params, searchParams }: SearchProps) {
   return (
     <main className='flex min-h-screen flex-col items-center p-10 gap-2 bg-slate-800'>
       <SearchBar />
-      <div className='flex  flex-row gap-10'>
-        <div className='flex flex-col justify-center  gap-10'>
+      <div className='flex flex-col-reverse gap-2 sm:flex-row sm:gap-5'>
+        <div className='flex flex-row-reverse gap-2 justify-start sm:flex-col sm:gap-5'>
           <Card>
             <Link href='categories'>
-              <div className='min-h-32 h-32 flex flex-col justify-center place-items-center'>
+              <div className='h-fit py-5 flex flex-col justify-center place-items-center sm:h-32'>
                 <div className='text-lg text-slate-200'>Categories</div>
-                <div className='text-sm text-slate-300 hover:text-slate-500'>
+                <div className='text-sm text-center text-slate-300 hover:text-slate-500'>
                   Click here to get joke categories
                 </div>
               </div>
             </Link>
           </Card>
           <Card>
-            <div className='min-h-32 h-32 flex flex-col justify-center place-items-center'>
+            <div className='h-fit py-5 flex flex-col justify-center place-items-center sm:h-32'>
               <form className='m-0' action={refreshJoke}>
                 <button>
                   <div className='text-lg text-slate-200'>Get new joke</div>

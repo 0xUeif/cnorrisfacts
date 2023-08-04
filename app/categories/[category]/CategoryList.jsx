@@ -20,5 +20,9 @@ export default function Category_list(categories) {
       </li>
     </Link>
   ));
-  return <ul className=' p-5 flex flex-row gap-2'>{listItems}</ul>;
+  return (
+    <ul className='text-slate-500 flex flex-col items-center h-32 w-full flex-wrap gap-2 md:flex-row md:flex-nowrap md:h-fit md:justify-center'>
+      {listItems}
+    </ul>
+  );
 }

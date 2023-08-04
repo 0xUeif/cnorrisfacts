@@ -22,11 +22,11 @@ export default async function Page({
     <main className='flex min-h-screen flex-col items-center p-10 gap-2 bg-slate-800'>
       <SearchBar />
       <Category_list categories={category} />
-      <div className='flex  flex-row gap-10'>
-        <div className='flex flex-col justify-center  gap-10'>
+      <div className='flex flex-col-reverse gap-2 sm:flex-row sm:gap-5'>
+        <div className='flex flex-row-reverse gap-2 justify-start sm:flex-col sm:gap-5 '>
           <Card>
             <Link href='/categories'>
-              <div className='min-h-32 h-32 flex flex-col justify-center place-items-center'>
+              <div className='h-24 py-5 flex flex-col justify-center place-items-center sm:h-32'>
                 <div className='text-lg text-slate-200'>Categories</div>
                 <div className='text-sm text-slate-300 hover:text-slate-500'>
                   Click here to get joke categories
@@ -35,7 +35,7 @@ export default async function Page({
             </Link>
           </Card>
           <Card>
-            <div className='min-h-32 h-32 flex flex-col justify-center place-items-center'>
+            <div className='h-24 py-5 flex flex-col justify-center place-items-center sm:h-32'>
               <form className='m-0' action={refreshJoke}>
                 <button>
                   <div className='text-lg text-slate-200'>Get new joke</div>
